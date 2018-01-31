@@ -36,7 +36,7 @@ This module exposes the REST API endpoints. The API contract can be viewed at ``
 ### Run from IDE
 Double click the ```spring-boot:run``` goal from the editor.
 
-![IDE Screenshot](docs/AON.PNG)
+![IDE Screenshot](docs/AON.JPG)
 
 ### Run using maven
 Run the following command `mvn spring-boot:run` soon after moving to API module from the terminal/command prompt.
