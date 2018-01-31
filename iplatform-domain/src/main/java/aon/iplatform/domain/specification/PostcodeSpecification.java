@@ -14,14 +14,15 @@ public class PostcodeSpecification extends AbstractInsurerSpecification {
     public Predicate build(Root<Insurer> insurer, Customer customer, CriteriaBuilder cb) {
         Join<ExclusionCriteria, Customer> join = insurer.join("exclusionCriterias", JoinType.LEFT);
         join.on(
-                cb.and(
-                        cb.equal(join.get("criteriaCode"), CriteriaCode.POST_CODES)
-                )
+                cb.equal(join.get("criteriaCode"), CriteriaCode.POST_CODES)
         );
 
         return cb.or(
                 cb.isNull(join.get("criteriaValue")),
-                cb.like(cb.upper(join.<String>get("criteriaValue")), "%" + customer.getPostcode() + "%")
+                cb.and(
+                    cb.isNotNull(join.get("criteriaValue")),
+                    cb.like(cb.upper(join.<String>get("criteriaValue")), "%" + customer.getPostcode() + "%").not()
+                )
         );
     }
 }

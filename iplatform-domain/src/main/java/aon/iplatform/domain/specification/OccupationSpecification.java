@@ -14,14 +14,15 @@ public class OccupationSpecification extends AbstractInsurerSpecification {
     public Predicate build(Root<Insurer> insurer, Customer customer, CriteriaBuilder cb) {
         Join<ExclusionCriteria, Customer> join = insurer.join("exclusionCriterias", JoinType.LEFT);
         join.on(
-                cb.and(
-                        cb.equal(join.get("criteriaCode"), CriteriaCode.OCCUPATIONS)
-                )
+                cb.equal(join.get("criteriaCode"), CriteriaCode.OCCUPATIONS)
         );
 
         return cb.or(
                 cb.isNull(join.get("criteriaValue")),
-                cb.like(cb.upper(join.<String>get("criteriaValue")), "%" + customer.getOccupation().toUpperCase() + "%")
+                cb.and(
+                    cb.isNotNull(join.get("criteriaValue")),
+                    cb.like(cb.upper(join.<String>get("criteriaValue")), "%" + customer.getOccupation().toUpperCase() + "%").not()
+                )
         );
     }
 }

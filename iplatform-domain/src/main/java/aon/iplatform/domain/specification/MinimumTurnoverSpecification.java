@@ -15,14 +15,15 @@ public class MinimumTurnoverSpecification extends AbstractInsurerSpecification {
     public Predicate build(Root<Insurer> insurer, Customer customer, CriteriaBuilder cb) {
         Join<ExclusionCriteria, Customer> join = insurer.join("exclusionCriterias", JoinType.LEFT);
         join.on(
-                cb.and(
-                        cb.equal(join.get("criteriaCode"), CriteriaCode.MIN_TURNOVER)
-                )
+                cb.equal(join.get("criteriaCode"), CriteriaCode.MIN_TURNOVER)
         );
 
         return cb.or(
                 cb.isNull(join.get("criteriaValue")),
-                cb.lessThan(join.<BigDecimal>get("criteriaValue"), customer.getAnnualTurnover())
+                cb.and(
+                    cb.isNotNull(join.get("criteriaValue")),
+                    cb.lessThan(join.<BigDecimal>get("criteriaValue"), customer.getAnnualTurnover())
+                )
         );
     }
 }
