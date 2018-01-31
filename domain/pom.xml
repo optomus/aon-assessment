@@ -19,5 +19,10 @@
             <artifactId>iplatform-domain</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>aon</groupId>
+            <artifactId>iplatform-app</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 </project>
