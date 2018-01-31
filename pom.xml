@@ -8,7 +8,9 @@
     <artifactId>iplatform</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-
+    <modules>
+        <module>domain</module>
+    </modules>
     <repositories>
         <repository>
             <snapshots>
