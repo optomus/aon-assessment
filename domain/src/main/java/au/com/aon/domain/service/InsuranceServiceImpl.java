@@ -2,6 +2,7 @@ package au.com.aon.domain.service;
 
 import au.com.aon.domain.model.Insurer;
 import au.com.aon.domain.specification.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,7 +14,11 @@ import java.util.List;
  */
 @Service
 public class InsuranceServiceImpl implements InsuranceService {
+
+    @Autowired
     private InsurerRepository insurerRepository;
+
+    @Autowired
     private PremiumCompService premiumCompService;
 
     @Transactional
@@ -23,7 +28,7 @@ public class InsuranceServiceImpl implements InsuranceService {
                         .or(new AndSpecification(new PostcodeSpecification(), new OccupationSpecification()));
 
         List<Quote> quotes = new ArrayList<>();
-        List<Insurer> insurers = insurerRepository.getSatisfiedInsurers(insurerSpecification);
+        List<Insurer> insurers = insurerRepository.getSatisfiedInsurers(customer, insurerSpecification);
         insurers.forEach(insurer -> {
             Quote quote = new Quote();
             quote.setInsurer(insurer);

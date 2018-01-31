@@ -9,5 +9,5 @@ import java.util.List;
  *
  */
 public interface InsurerRepository {
-    List<Insurer> getSatisfiedInsurers(InsurerSpecification insurerSpecification);
+    List<Insurer> getSatisfiedInsurers(Customer customer, InsurerSpecification insurerSpecification);
 }

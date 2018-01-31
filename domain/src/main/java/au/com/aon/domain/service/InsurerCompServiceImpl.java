@@ -13,6 +13,6 @@ public class InsurerCompServiceImpl implements InsurerCompService {
     private InsurerRepository insurerRepository;
 
     public List<Insurer> getInsurers(InsurerSpecification insurerSpecification) {
-        return insurerRepository.getSatisfiedInsurers(insurerSpecification);
+        return insurerRepository.getSatisfiedInsurers(, insurerSpecification);
     }
 }

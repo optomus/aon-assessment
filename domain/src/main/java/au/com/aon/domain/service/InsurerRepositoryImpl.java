@@ -21,11 +21,11 @@ public class InsurerRepositoryImpl implements InsurerRepository {
     private EntityManager em;
 
     @Override
-    public List<Insurer> getSatisfiedInsurers(InsurerSpecification insurerSpecification) {
+    public List<Insurer> getSatisfiedInsurers(Customer customer, InsurerSpecification insurerSpecification) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Insurer> query = cb.createQuery(Insurer.class);
         Root<Insurer> root = query.from(Insurer.class);
-        query.where(insurerSpecification.build(root, null, cb));
+        query.where(insurerSpecification.build(root, customer, cb));
         return em.createQuery(query.select(root)).getResultList();
     }
 
