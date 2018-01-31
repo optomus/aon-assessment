@@ -7,9 +7,14 @@ import java.util.Set;
  *
  */
 @Entity
+@Table(name = "insurer")
 public class Insurer {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private Long id;
+
     @Column(name = "insurer_name")
     private String name;
 

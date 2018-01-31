@@ -6,7 +6,12 @@ import javax.persistence.*;
  *
  */
 @Entity
+@Table(name = "exclusion_criteria")
 public class ExclusionCriteria {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @Column(name = "criteria_code")
     @Enumerated(EnumType.STRING)
@@ -16,7 +21,7 @@ public class ExclusionCriteria {
     private String criteriaValue;
 
     @ManyToOne
-    @JoinColumn(name = "insurer_name")
+    @JoinColumn(name = "insurer_id")
     private Insurer insurer;
 
     public String getCriteriaValue() {

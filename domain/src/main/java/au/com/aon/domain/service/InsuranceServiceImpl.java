@@ -16,7 +16,7 @@ import java.util.List;
 public class InsuranceServiceImpl implements InsuranceService {
 
     @Autowired
-    private InsurerRepository insurerRepository;
+    private InsurerCompService insurerCompService;
 
     @Autowired
     private PremiumCompService premiumCompService;
@@ -28,7 +28,7 @@ public class InsuranceServiceImpl implements InsuranceService {
                         .or(new AndSpecification(new PostcodeSpecification(), new OccupationSpecification()));
 
         List<Quote> quotes = new ArrayList<>();
-        List<Insurer> insurers = insurerRepository.getSatisfiedInsurers(customer, insurerSpecification);
+        List<Insurer> insurers = insurerCompService.getInsurers(customer, insurerSpecification);
         insurers.forEach(insurer -> {
             Quote quote = new Quote();
             quote.setInsurer(insurer);

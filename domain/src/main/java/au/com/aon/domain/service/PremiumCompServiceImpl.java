@@ -1,12 +1,14 @@
 package au.com.aon.domain.service;
 
 import au.com.aon.domain.model.Insurer;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 
 /**
  *
  */
+@Service
 public class PremiumCompServiceImpl implements PremiumCompService {
     public Premium getPremium(Insurer insurer, Customer customer) {
         Premium premium = new Premium();
