@@ -1,7 +1,7 @@
 package au.com.aon.domain.model;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -14,7 +14,7 @@ public class Insurer {
     private String name;
 
     @OneToMany(mappedBy = "insurer", cascade = CascadeType.ALL)
-    private List<ExclusionSpecification> exclusionSpecifications;
+    private Set<ExclusionCriteria> exclusionCriterias;
 
     public String getName() {
         return name;
@@ -24,11 +24,11 @@ public class Insurer {
         this.name = name;
     }
 
-    public List<ExclusionSpecification> getExclusionSpecifications() {
-        return exclusionSpecifications;
+    public Set<ExclusionCriteria> getExclusionCriterias() {
+        return exclusionCriterias;
     }
 
-    public void setExclusionSpecifications(List<ExclusionSpecification> exclusionSpecifications) {
-        this.exclusionSpecifications = exclusionSpecifications;
+    public void setExclusionCriterias(Set<ExclusionCriteria> exclusionCriterias) {
+        this.exclusionCriterias = exclusionCriterias;
     }
 }

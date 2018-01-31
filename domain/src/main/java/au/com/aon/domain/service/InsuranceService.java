@@ -6,5 +6,5 @@ import java.util.List;
  *
  */
 public interface InsuranceService {
-    public List<Quote> getQuotes(Customer customer);
+    List<Quote> getQuotes(Customer customer);
 }

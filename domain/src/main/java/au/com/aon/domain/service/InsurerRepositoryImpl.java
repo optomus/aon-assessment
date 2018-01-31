@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 /**
@@ -17,15 +18,15 @@ import java.util.List;
 public class InsurerRepositoryImpl implements InsurerRepository {
 
     @PersistenceContext
-    private EntityManager entityManager;
+    private EntityManager em;
 
     @Override
     public List<Insurer> getSatisfiedInsurers(InsurerSpecification insurerSpecification) {
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Insurer> criteriaQuery = criteriaBuilder.createQuery(Insurer.class);
-        criteriaQuery.where();
-
-        return entityManager.createQuery(criteriaQuery).getResultList();
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Insurer> query = cb.createQuery(Insurer.class);
+        Root<Insurer> root = query.from(Insurer.class);
+        query.where(insurerSpecification.build(root, null, cb));
+        return em.createQuery(query.select(root)).getResultList();
     }
 
 }

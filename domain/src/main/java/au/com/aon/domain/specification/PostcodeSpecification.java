@@ -1,20 +1,30 @@
 package au.com.aon.domain.specification;
 
-import au.com.aon.domain.service.Customer;
-import au.com.aon.domain.model.ExclusionCode;
-import au.com.aon.domain.model.ExclusionSpecification;
+import au.com.aon.domain.model.ExclusionCriteria;
+import au.com.aon.domain.model.CriteriaCode;
 import au.com.aon.domain.model.Insurer;
+import au.com.aon.domain.service.Customer;
 
-import java.util.Arrays;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 
 public class PostcodeSpecification extends AbstractInsurerSpecification {
-    public boolean isSatisfiedBy(Insurer insurer, Customer customer) {
-        ExclusionSpecification specification =
-                resolveExclusionSpecification(insurer.getExclusionSpecifications(), ExclusionCode.POST_CODES);
-        if (specification != null) {
-            return Arrays.asList(specification.getValue().split(",")).contains(customer.getPostcode());
-        }
-        return true;
+
+    @Override
+    public Predicate build(Root<Insurer> insurer, Customer customer, CriteriaBuilder cb) {
+        Join<ExclusionCriteria, Customer> join = insurer.join("exclusions");
+        join.on(
+                cb.and(
+                        cb.equal(join.get("exclusionCode"), CriteriaCode.POST_CODES)
+                )
+        );
+
+        return cb.and(
+                cb.isNotNull(join.get("value")),
+                cb.like(join.<String>get("value"), customer.getPostcode())
+        );
     }
 }

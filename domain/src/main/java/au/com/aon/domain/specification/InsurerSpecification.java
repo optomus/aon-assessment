@@ -11,7 +11,7 @@ import javax.persistence.criteria.Root;
  *
  */
 public interface InsurerSpecification {
-    Predicate buildSpecification(CriteriaBuilder criteriaBuilder, Root<Insurer> insurer, Customer customer);
+    Predicate build(Root<Insurer> insurer, Customer customer, CriteriaBuilder cb);
 
     InsurerSpecification and(InsurerSpecification other);
 
