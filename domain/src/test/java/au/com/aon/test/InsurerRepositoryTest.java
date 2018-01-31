@@ -3,9 +3,7 @@ package au.com.aon.test;
 import au.com.aon.domain.model.Insurer;
 import au.com.aon.domain.service.Customer;
 import au.com.aon.domain.service.InsurerRepository;
-import au.com.aon.domain.specification.MinimumTurnoverSpecification;
-import au.com.aon.domain.specification.OccupationSpecification;
-import au.com.aon.domain.specification.PostcodeSpecification;
+import au.com.aon.domain.specification.*;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -83,6 +81,46 @@ public class InsurerRepositoryTest {
 
         Assert.assertTrue("Test insurers for PostcodeSpecification", insurers.stream().anyMatch(insurer ->
                 Arrays.asList("Insurer1", "Insurer2").contains(insurer.getName())
+        ));
+
+    }
+
+    @Test
+    public void testGetSatisfiedInsurersForMinimumTurnoverSpecificationOrOccupationSpecificationAndPostcodeSpecification() {
+
+        Customer customer = new Customer();
+        customer.setAnnualTurnover(BigDecimal.valueOf(600000));
+        customer.setOccupation("Builder");
+        customer.setPostcode("2000");
+
+        InsurerSpecification specification = new MinimumTurnoverSpecification().or(
+                new AndSpecification(new OccupationSpecification(), new PostcodeSpecification()));
+
+        List<Insurer> insurers = insurerRepository.getSatisfiedInsurers(customer, specification);
+        Assert.assertTrue("Test insurers for Platform", insurers.stream().anyMatch(insurer ->
+                Arrays.asList("Insurer1", "Insurer2", "Insurer3", "Insurer4").contains(insurer.getName())
+        ));
+
+        customer.setAnnualTurnover(BigDecimal.valueOf(100000));
+        insurers = insurerRepository.getSatisfiedInsurers(customer, specification);
+        Assert.assertTrue("Test insurers for Platform", insurers.stream().anyMatch(insurer ->
+                Arrays.asList("Insurer1", "Insurer2").contains(insurer.getName())
+        ));
+
+        customer.setOccupation("Plumber");
+        customer.setAnnualTurnover(BigDecimal.valueOf(600000));
+        insurers = insurerRepository.getSatisfiedInsurers(customer, specification);
+        Assert.assertTrue("Test insurers for Platform", insurers.stream().anyMatch(insurer ->
+                Arrays.asList("Insurer1", "Insurer2", "Insurer4").contains(insurer.getName())
+        ));
+
+
+        customer.setPostcode("2001");
+        customer.setOccupation("Butcher");
+        customer.setAnnualTurnover(BigDecimal.valueOf(300000));
+        insurers = insurerRepository.getSatisfiedInsurers(customer, specification);
+        Assert.assertTrue("Test insurers for Platform", insurers.stream().anyMatch(insurer ->
+                Arrays.asList("Insurer1", "Insurer3").contains(insurer.getName())
         ));
 
     }
