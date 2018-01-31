@@ -1,10 +1,13 @@
 package aon.iplatform.domain.model.common;
 
+import io.swagger.annotations.ApiModel;
+
 import java.math.BigDecimal;
 
 /**
  *
  */
+@ApiModel(value="Premium", description="Premium")
 public class Premium {
     private BigDecimal annual;
     private BigDecimal monthly;

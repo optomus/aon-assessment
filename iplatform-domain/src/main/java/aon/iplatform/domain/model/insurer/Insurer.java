@@ -1,5 +1,7 @@
 package aon.iplatform.domain.model.insurer;
 
+import io.swagger.annotations.ApiModel;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -8,6 +10,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "insurer")
+@ApiModel(value="Insurer", description="Insurer")
 public class Insurer {
 
     @Id

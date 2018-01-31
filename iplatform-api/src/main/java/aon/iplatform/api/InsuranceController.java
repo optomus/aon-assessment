@@ -3,10 +3,9 @@ package aon.iplatform.api;
 import aon.iplatform.domain.model.common.Customer;
 import aon.iplatform.domain.model.common.Quote;
 import aon.iplatform.service.business.InsuranceService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,15 +25,17 @@ import java.util.List;
 @Api(value = "Insurance API", description = "Exposes APIs for insurance platform")
 public class InsuranceController {
 
+    public static final Logger logger = LoggerFactory.getLogger(InsuranceController.class);
+
     @Autowired
     private InsuranceService insuranceService;
 
-    @ApiOperation(value = "Gets quotes", response = Quote.class, responseContainer = "List")
+    @ApiOperation(value = "Gets quotes", notes = "returns list of quotes", response = Quote.class, responseContainer = "List")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success", response = Quote.class, responseContainer = "List")
     })
     @RequestMapping(path = "/customer/quotes", method = RequestMethod.POST)
-    public ResponseEntity<List<Quote>> greeting(@Valid @RequestBody Customer customer) {
+    public ResponseEntity<List<Quote>> greeting(@Valid  @ApiParam(value = "Customer") @RequestBody Customer customer) {
         return ResponseEntity.status(HttpStatus.OK).body(insuranceService.getQuotes(customer));
     }
 }

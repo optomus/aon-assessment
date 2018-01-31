@@ -1,19 +1,26 @@
 package aon.iplatform.domain.model.common;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 /**
  *
  */
+@ApiModel(value="Customer", description="Customer")
 public class Customer {
     @NotNull
+    @ApiModelProperty(value = "postcode", example = "2000")
     private String postcode;
 
     @NotNull
+    @ApiModelProperty(value = "occupation", example = "Butcher")
     private String occupation;
 
     @NotNull
+    @ApiModelProperty(value = "annualTurnover", example = "420000")
     private BigDecimal annualTurnover;
 
     public String getPostcode() {

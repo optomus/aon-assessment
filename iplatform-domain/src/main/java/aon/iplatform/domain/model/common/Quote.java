@@ -2,14 +2,18 @@ package aon.iplatform.domain.model.common;
 
 
 import aon.iplatform.domain.model.insurer.Insurer;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Created by pnavaratnam on 30/01/2018.
+ *
  */
+@ApiModel(value="Quote", description="Insurer Quote")
 public class Quote {
     private Insurer insurer;
     private Premium premium;
 
+    @ApiModelProperty(value = "Insurer")
     public Insurer getInsurer() {
         return insurer;
     }
@@ -18,6 +22,7 @@ public class Quote {
         this.insurer = insurer;
     }
 
+    @ApiModelProperty(value = "Premium")
     public Premium getPremium() {
         return premium;
     }
