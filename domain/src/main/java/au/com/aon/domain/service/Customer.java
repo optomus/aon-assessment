@@ -1,13 +1,19 @@
 package au.com.aon.domain.service;
 
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 /**
  *
  */
 public class Customer {
+    @NotNull
     private String postcode;
+
+    @NotNull
     private String occupation;
+
+    @NotNull
     private BigDecimal annualTurnover;
 
     public String getPostcode() {
