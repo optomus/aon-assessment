@@ -1,6 +1,5 @@
 package aon.iplatform.domain.repository;
 
-import aon.iplatform.InsurancePlatformApp;
 import aon.iplatform.domain.model.common.Customer;
 import aon.iplatform.domain.model.insurer.Insurer;
 import aon.iplatform.domain.specification.*;
@@ -21,7 +20,7 @@ import java.util.List;
  *
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = InsurancePlatformApp.class)
+@SpringBootTest
 @AutoConfigureTestEntityManager
 public class InsurerRepositoryTest {
 

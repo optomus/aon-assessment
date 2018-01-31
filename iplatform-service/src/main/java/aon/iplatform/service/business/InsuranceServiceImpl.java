@@ -1,8 +1,11 @@
 package aon.iplatform.service.business;
 
+import aon.iplatform.domain.model.common.Customer;
+import aon.iplatform.domain.model.common.Quote;
+import aon.iplatform.domain.model.insurer.Insurer;
+import aon.iplatform.domain.specification.*;
 import aon.iplatform.service.domain.InsurerCompService;
 import aon.iplatform.service.domain.PremiumCompService;
-import au.com.aon.domain.model.Insurer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
