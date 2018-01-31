@@ -13,7 +13,6 @@
         <module>iplatform-service</module>
         <module>iplatform-domain</module>
         <module>iplatform-api</module>
-        <module>iplatform-app</module>
     </modules>
 
     <repositories>
