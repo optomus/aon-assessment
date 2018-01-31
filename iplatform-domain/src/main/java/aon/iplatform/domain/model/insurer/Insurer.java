@@ -1,5 +1,6 @@
 package aon.iplatform.domain.model.insurer;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 
 import javax.persistence.*;
@@ -16,11 +17,13 @@ public class Insurer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
+    @JsonIgnore
     private Long id;
 
     @Column(name = "insurer_name")
     private String name;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "insurer", cascade = CascadeType.ALL)
     private Set<ExclusionCriteria> exclusionCriterias;
 
