@@ -1,6 +1,32 @@
 ## Author
 > Dash Nava
 
+# Opinion Tasks
+---
+## Trends
+Describe a trend which has happened with enterprise applications over the last two or three years. 
+How do you see this trend influencing corporate application development? What are you doing to prepare for this trend?
+
+
+Answer) The enterprise applications are moving towards micro services, cloud base solutions and frontend UI frameworks.
+These trends influence in terms of development effort, license cost, support cost
+
+## Describe Software that Delivers User Value
+Describe a product or project you worked on that delivered high value to the user. 
+Which specific aspects did you think were critical in successfully creating value for the user?
+
+Answer) The project that I worked let the customer to mix and match the insurance products as a package along with the finance repayments.
+As a customer I was able to understand the repayment amount changes by adding and removing products on the fly which assisted to plan my financials.
+
+Seamless UI, better UX, easy to understand wordings
+
+## Your Values
+What are your core values / principals as a software engineering professional working in a team environment and why are they important to you?
+
+Answer)
+
+# Programming Task
+---
 # Solution Overview
 
 The solution is build as a multi module maven spring boot project. 
