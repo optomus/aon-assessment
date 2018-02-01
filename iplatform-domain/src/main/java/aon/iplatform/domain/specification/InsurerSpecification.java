@@ -13,6 +13,8 @@ import javax.persistence.criteria.Root;
 public interface InsurerSpecification {
     Predicate build(Root<Insurer> insurer, Customer customer, CriteriaBuilder cb);
 
+    boolean isSatisfiedBy(Insurer insurer, Customer customer);
+
     InsurerSpecification and(InsurerSpecification other);
 
     InsurerSpecification or(InsurerSpecification other);

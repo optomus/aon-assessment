@@ -21,4 +21,9 @@ public class InsurerCompServiceImpl implements InsurerCompService {
     public List<Insurer> getInsurers(Customer customer, InsurerSpecification insurerSpecification) {
         return insurerRepository.getSatisfiedInsurers(customer, insurerSpecification);
     }
+
+    @Override
+    public List<Insurer> getInsurers() {
+        return insurerRepository.getInsurers();
+    }
 }

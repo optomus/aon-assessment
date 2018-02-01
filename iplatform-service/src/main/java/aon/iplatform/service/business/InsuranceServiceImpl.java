@@ -27,12 +27,13 @@ public class InsuranceServiceImpl implements InsuranceService {
 
     @Transactional
     public List<Quote> getQuotes(Customer customer) {
-        InsurerSpecification insurerSpecification =
-                new MinimumTurnoverSpecification()
-                        .or(new AndSpecification(new PostcodeSpecification(), new OccupationSpecification()));
+        InsurerSpecification insurerSpecification = new OrSpecification(
+                new AndSpecification(new PostcodeSpecification(), new OccupationSpecification()), new MinimumTurnoverSpecification());
 
-        List<Quote> quotes = new ArrayList<>();
-        List<Insurer> insurers = insurerCompService.getInsurers(customer, insurerSpecification);
+        List<Insurer> insurers = insurerCompService.getInsurers();
+        insurers.removeIf(i -> insurerSpecification.isSatisfiedBy(i, customer));
+        List<Quote> quotes = new ArrayList<>(insurers.size());
+
         insurers.forEach(insurer -> {
             Quote quote = new Quote();
             quote.setInsurer(insurer);

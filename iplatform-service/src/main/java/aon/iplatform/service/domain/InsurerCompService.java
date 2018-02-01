@@ -11,4 +11,6 @@ import java.util.List;
  */
 public interface InsurerCompService {
     List<Insurer> getInsurers(Customer customer, InsurerSpecification insurerSpecification);
+
+    List<Insurer> getInsurers();
 }

@@ -21,6 +21,11 @@ public class OrSpecification extends AbstractInsurerSpecification {
     }
 
     @Override
+    public boolean isSatisfiedBy(Insurer insurer, Customer customer) {
+        return one.isSatisfiedBy(insurer, customer) | two.isSatisfiedBy(insurer, customer);
+    }
+
+    @Override
     public Predicate build(Root<Insurer> insurer, Customer customer, CriteriaBuilder cb) {
         return cb.or(
                 one.build(insurer, customer, cb),

@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 @ApiModel(value="Customer", description="Customer")
 public class Customer {
     @NotNull
-    @ApiModelProperty(value = "postcode", example = "2000")
+    @ApiModelProperty(value = "postcode", example = "2001")
     private String postcode;
 
     @NotNull
@@ -20,7 +20,7 @@ public class Customer {
     private String occupation;
 
     @NotNull
-    @ApiModelProperty(value = "annualTurnover", example = "420000")
+    @ApiModelProperty(value = "annualTurnover", example = "300000")
     private BigDecimal annualTurnover;
 
     public String getPostcode() {

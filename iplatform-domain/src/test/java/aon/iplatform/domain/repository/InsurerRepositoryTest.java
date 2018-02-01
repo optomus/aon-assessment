@@ -4,6 +4,7 @@ import aon.iplatform.domain.model.common.Customer;
 import aon.iplatform.domain.model.insurer.Insurer;
 import aon.iplatform.domain.specification.*;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import java.util.List;
 /**
  *
  */
+@Ignore
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureTestEntityManager
