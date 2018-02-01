@@ -41,7 +41,7 @@ Double click the ```spring-boot:run``` goal from the editor.
 
 ### Run using maven
 Run the following command `mvn spring-boot:run` soon after moving to API module from the terminal/command prompt.
-<br>```e.g. c:\project\aon-assessment\iplatform-api>mvn spring-boot:run```
+<br>```e.g. c:\project\assessment\iplatform-api>mvn spring-boot:run```
 
 #### Test Data for API
 ```json
