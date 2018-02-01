@@ -26,7 +26,7 @@ This module has the domain models, repositories and specifications.
 ---
 This module has the domain and business services.
 
-### 3. API
+### 3. iplatform-api
 ---
 This module exposes the REST API endpoints. The API can be tested by using the swagger UI at ```http://localhost:9091/swagger-ui.html``` 
 after running the application.
