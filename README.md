@@ -3,8 +3,8 @@
 
 # Solution Overview
 
-The solution is build as a multi module maven spring boot project. 
-The project is broken down into sub logical modules.
+The solution is built as a multi module maven spring boot project. 
+The project is broken down into sub logical modules following DDD as a guideline.
 
 
 ## Technologies
@@ -21,14 +21,15 @@ The project is broken down into sub logical modules.
 
 ### 1. iplatform-domain
 ---
-This module has the domain and common models, repositories, specifications.
+This module has the domain models, repositories and specifications.
 ### 2. iplatform-service
 ---
-This module has the domain and business.
+This module has the domain and business services.
 
 ### 3. API
 ---
-This module exposes the REST API endpoints. The API contract can be viewed at ```http://localhost:9091/swagger-ui.html```
+This module exposes the REST API endpoints. The API can be tested by using the swagger UI at ```http://localhost:9091/swagger-ui.html``` 
+after running the application.
 
 ## How to run the application
 
