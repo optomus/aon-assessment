@@ -7,24 +7,9 @@ import aon.iplatform.domain.model.insurer.Insurer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.persistence.criteria.*;
 
-
-public class OccupationSpecification extends AbstractInsurerSpecification {
-    public static final Logger logger = LoggerFactory.getLogger(OccupationSpecification.class);
-
-    @Override
-    public Predicate build(Root<Insurer> insurer, Customer customer, CriteriaBuilder cb) {
-        Join<ExclusionCriteria, Customer> join = insurer.join("exclusionCriterias", JoinType.LEFT);
-        join.on(
-                cb.equal(join.get("criteriaCode"), CriteriaCode.OCCUPATIONS)
-        );
-
-        return cb.and(
-                cb.isNotNull(join.get("criteriaValue")),
-                cb.like(cb.upper(join.<String>get("criteriaValue")), "%" + customer.getOccupation().toUpperCase() + "%").not()
-        );
-    }
+public class OccupationExclusionSpecification extends AbstractInsurerSpecification {
+    public static final Logger logger = LoggerFactory.getLogger(OccupationExclusionSpecification.class);
 
     @Override
     public boolean isSatisfiedBy(Insurer insurer, Customer customer) {

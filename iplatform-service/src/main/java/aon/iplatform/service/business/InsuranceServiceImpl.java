@@ -4,8 +4,8 @@ import aon.iplatform.domain.model.common.Customer;
 import aon.iplatform.domain.model.common.Quote;
 import aon.iplatform.domain.model.insurer.Insurer;
 import aon.iplatform.domain.specification.*;
-import aon.iplatform.service.domain.InsurerCompService;
-import aon.iplatform.service.domain.PremiumCompService;
+import aon.iplatform.service.domain.InsurerDomainService;
+import aon.iplatform.service.domain.PremiumDomainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,24 +20,24 @@ import java.util.List;
 public class InsuranceServiceImpl implements InsuranceService {
 
     @Autowired
-    private InsurerCompService insurerCompService;
+    private InsurerDomainService insurerDomainService;
 
     @Autowired
-    private PremiumCompService premiumCompService;
+    private PremiumDomainService premiumDomainService;
 
     @Transactional
     public List<Quote> getQuotes(Customer customer) {
-        InsurerSpecification insurerSpecification = new OrSpecification(
-                new AndSpecification(new PostcodeSpecification(), new OccupationSpecification()), new MinimumTurnoverSpecification());
+        InsurerExclusionSpecification insurerExclusionSpecification = new OrSpecification(
+                new AndSpecification(new PostcodeExclusionSpecification(), new OccupationExclusionSpecification()), new MinimumTurnoverExclusionSpecification());
 
-        List<Insurer> insurers = insurerCompService.getInsurers();
-        insurers.removeIf(i -> insurerSpecification.isSatisfiedBy(i, customer));
+        List<Insurer> insurers = insurerDomainService.getInsurers();
+        insurers.removeIf(i -> insurerExclusionSpecification.isSatisfiedBy(i, customer));
         List<Quote> quotes = new ArrayList<>(insurers.size());
 
         insurers.forEach(insurer -> {
             Quote quote = new Quote();
             quote.setInsurer(insurer);
-            quote.setPremium(premiumCompService.getPremium(insurer, customer));
+            quote.setPremium(premiumDomainService.getPremium(insurer, customer));
             quotes.add(quote);
         });
 

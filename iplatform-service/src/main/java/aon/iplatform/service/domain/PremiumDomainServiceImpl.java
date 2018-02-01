@@ -11,7 +11,7 @@ import java.math.BigDecimal;
  *
  */
 @Service
-public class PremiumCompServiceImpl implements PremiumCompService {
+public class PremiumDomainServiceImpl implements PremiumDomainService {
     public Premium getPremium(Insurer insurer, Customer customer) {
         Premium premium = new Premium();
         premium.setAnnual(BigDecimal.valueOf(1200.00));

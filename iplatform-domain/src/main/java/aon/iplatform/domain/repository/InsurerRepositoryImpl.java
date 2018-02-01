@@ -1,8 +1,6 @@
 package aon.iplatform.domain.repository;
 
-import aon.iplatform.domain.model.common.Customer;
 import aon.iplatform.domain.model.insurer.Insurer;
-import aon.iplatform.domain.specification.InsurerSpecification;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -26,15 +24,6 @@ public class InsurerRepositoryImpl implements InsurerRepository {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Insurer> query = cb.createQuery(Insurer.class);
         Root<Insurer> root = query.from(Insurer.class);
-        return em.createQuery(query.select(root)).getResultList();
-    }
-
-    @Override
-    public List<Insurer> getSatisfiedInsurers(Customer customer, InsurerSpecification insurerSpecification) {
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<Insurer> query = cb.createQuery(Insurer.class);
-        Root<Insurer> root = query.from(Insurer.class);
-        query.where(insurerSpecification.build(root, customer, cb));
         return em.createQuery(query.select(root)).getResultList();
     }
 

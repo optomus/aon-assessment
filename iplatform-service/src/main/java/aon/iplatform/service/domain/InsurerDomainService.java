@@ -1,4 +1,4 @@
-package aon.iplatform.domain.repository;
+package aon.iplatform.service.domain;
 
 import aon.iplatform.domain.model.insurer.Insurer;
 
@@ -7,6 +7,7 @@ import java.util.List;
 /**
  *
  */
-public interface InsurerRepository {
+public interface InsurerDomainService {
+
     List<Insurer> getInsurers();
 }

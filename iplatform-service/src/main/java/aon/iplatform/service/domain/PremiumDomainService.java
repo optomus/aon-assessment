@@ -7,7 +7,7 @@ import aon.iplatform.domain.model.insurer.Insurer;
 /**
  *
  */
-public interface PremiumCompService {
+public interface PremiumDomainService {
     Premium getPremium(Insurer insurer, Customer customer);
 
 }
