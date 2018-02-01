@@ -9,16 +9,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.math.BigDecimal;
 import java.util.HashSet;
 
 /**
  *
  */
 @RunWith(SpringRunner.class)
-public class MinimumTurnoverExclusionSpecificationTest {
+public class PostcodeExclusionSpecificationTest {
 
-    private MinimumTurnoverExclusionSpecification minimumTurnoverExclusionSpecification = new MinimumTurnoverExclusionSpecification();
+    private PostcodeExclusionSpecification specification = new PostcodeExclusionSpecification();
 
     @Test
     public void testIsSatisfiedBy() {
@@ -26,16 +25,16 @@ public class MinimumTurnoverExclusionSpecificationTest {
         Insurer insurer = new Insurer();
         insurer.setExclusionCriterias(new HashSet<>());
         ExclusionCriteria exclusionCriteria = new ExclusionCriteria();
-        exclusionCriteria.setCriteriaCode(CriteriaCode.MIN_TURNOVER);
-        exclusionCriteria.setCriteriaValue("400000");
+        exclusionCriteria.setCriteriaCode(CriteriaCode.POST_CODES);
+        exclusionCriteria.setCriteriaValue("2000, 2001");
         insurer.getExclusionCriterias().add(exclusionCriteria);
 
         Customer customer = new Customer();
-        customer.setAnnualTurnover(new BigDecimal("500000"));
-        Assert.assertFalse(minimumTurnoverExclusionSpecification.isSatisfiedBy(insurer, customer));
+        customer.setPostcode("2112");
+        Assert.assertFalse(specification.isSatisfiedBy(insurer, customer));
 
-        customer.setAnnualTurnover(new BigDecimal("350000"));
-        Assert.assertTrue(minimumTurnoverExclusionSpecification.isSatisfiedBy(insurer, customer));
+        customer.setPostcode("2001");
+        Assert.assertTrue(specification.isSatisfiedBy(insurer, customer));
 
     }
 }

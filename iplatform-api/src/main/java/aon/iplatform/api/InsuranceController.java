@@ -35,7 +35,7 @@ public class InsuranceController {
             @ApiResponse(code = 200, message = "Success", response = Quote.class, responseContainer = "List")
     })
     @RequestMapping(path = "/customer/quotes", method = RequestMethod.POST)
-    public ResponseEntity<List<Quote>> greeting(@Valid  @ApiParam(value = "Customer") @RequestBody Customer customer) {
+    public ResponseEntity<List<Quote>> getQuotes(@Valid  @ApiParam(value = "Customer") @RequestBody Customer customer) {
         return ResponseEntity.status(HttpStatus.OK).body(insuranceService.getQuotes(customer));
     }
 }
